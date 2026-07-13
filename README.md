@@ -1,7 +1,22 @@
 # Assistente-de-Delivery-com-AWS-Step-Functions-e-Bedrock
 Foi criando um Assistente de Delivery com a ajuda de um Agent da DIO no Antigravity. 
-Montei o fluxo sequencial (linear) igual ao do professor.
-Contornei as limitações de cotas de permissões do IAM usando uma política em linha (Inline Policy).
-Resolvi erros de gravação de logs desativando a função desnecessária de registros.
-Identifiquei a restrição regional e de modelos legados mudando o console para a região recomendada (N. Virgínia - us-east-1).
-Ajustou as aspas no JSONata e colocou o modelo ativo Llama 3 para rodar a conversa! 
+
+# Assistente de Delivery com AWS Step Functions e Amazon Bedrock
+
+Este projeto apresenta a criação de um assistente virtual de delivery para pizzaria utilizando a orquestração de serviços com **AWS Step Functions** e modelos de inteligência artificial generativa com **Amazon Bedrock**.
+
+## 🚀 Arquitetura do Fluxo
+
+O fluxo é sequencial e utiliza o modelo **Llama 3 (meta.llama3-8b-instruct-v1:0)** para processar as seguintes etapas:
+
+1. **Geração do Menu:** Apresenta boas-vindas e sugere pizzas.
+2. **Recomendação de Bebidas:** Harmoniza uma bebida com base na pizza recomendada.
+3. **Fechamento do Pedido:** Cria uma mensagem final com o resumo e tempo estimado de entrega.
+
+![Fluxo de Trabalho](./workflow.png)
+
+## 🛠️ Tecnologias Utilizadas
+
+- **AWS Step Functions:** Orquestração de microsserviços.
+- **Amazon Bedrock:** Execução de modelos de IA generativa (Llama 3).
+- **JSONata:** Linguagem de consulta e transformação de dados entre estados.
