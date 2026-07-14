@@ -20,3 +20,7 @@ O fluxo é sequencial e utiliza o modelo **Llama 3 (meta.llama3-8b-instruct-v1:0
 - **AWS Step Functions:** Orquestração de microsserviços.
 - **Amazon Bedrock:** Execução de modelos de IA generativa (Llama 3).
 - **JSONata:** Linguagem de consulta e transformação de dados entre estados.
+
+- <img width="1366" height="768" alt="states" src="https://github.com/user-attachments/assets/c7d2ef43-2d18-46ed-a1dd-ccb56875dd0a" />
+<img width="1366" height="768" alt="workflow" src="https://github.com/user-attachments/assets/59a51d0c-66dd-4e2f-857f-19eb45e0202e" />
+
