@@ -1,0 +1,57 @@
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "Bedrock Invoke Model first prompt",
+  "States": {
+    "Bedrock Invoke Model first prompt": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::bedrock:invokeModel",
+      "Arguments": {
+        "ModelId": "arn:aws:bedrock:us-east-1::foundation-model/meta.llama3-8b-instruct-v1:0",
+        "Body": {
+          "prompt": "Você é um assistente virtual de delivery de uma pizzaria. Dê boas-vindas de forma simpática, liste 3 sabores de pizza fictícios com preços e pergunte qual o cliente deseja pedir.",
+          "max_gen_len": 300,
+          "temperature": 0.7,
+          "top_p": 0.9
+        }
+      },
+      "Next": "Passagem"
+    },
+    "Passagem": {
+      "Type": "Pass",
+      "Next": "Bedrock Invoke model with secound prompt"
+    },
+    "Bedrock Invoke model with secound prompt": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::bedrock:invokeModel",
+      "Arguments": {
+        "ModelId": "arn:aws:bedrock:us-east-1::foundation-model/meta.llama3-8b-instruct-v1:0",
+        "Body": {
+          "prompt": "'Com base na seguinte sugestão de pizza:\n\n' & $states.input.Body.generation & '\n\nRecomende uma bebida (vinho, cerveja ou refrigerante) que harmonize perfeitamente com ela e descreva brevemente o porquê.'",
+          "max_gen_len": 300,
+          "temperature": 0.7,
+          "top_p": 0.9
+        }
+      },
+      "Next": "Passagem 2"
+    },
+    "Passagem 2": {
+      "Type": "Pass",
+      "Next": "Bedrock Invoke Model third prompt"
+    },
+    "Bedrock Invoke Model third prompt": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::bedrock:invokeModel",
+      "Arguments": {
+        "ModelId": "arn:aws:bedrock:us-east-1::foundation-model/meta.llama3-8b-instruct-v1:0",
+        "Body": {
+          "prompt": "'Com base na recomendação de bebida a seguir:\n\n' & $states.input.Body.generation & '\n\nCrie uma mensagem de agradecimento bem simpática confirmando o combo de pizza e a bebida sugerida. Diga que o pedido foi enviado para a cozinha e que o tempo estimado de entrega é de 30 a 45 minutos.'",
+          "max_gen_len": 300,
+          "temperature": 0.7,
+          "top_p": 0.9
+        }
+      },
+      "End": true
+    }
+  },
+  "QueryLanguage": "JSONata"
+}
